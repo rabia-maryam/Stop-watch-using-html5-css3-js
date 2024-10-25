@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+     <div class="insidecontainer">
+        <h1>StopWatch</h1>
+        <h2>Count Your Time</h2>
+        <h3 id="displayTime">00:00:00</h3>
+        <div class="buttons">
+        <button class="btn" onclick="stopWatch()">Stop</button>
+        <button class="btn" onclick="startWatch()">Start</button>
+        <button class="btn" onclick="resetWatch()">Reset</button>
+    </div>
+     </div>
+    </div>
+    <script>
+      let displayTime=document.getElementById('displayTime');
+      let seconds=0;
+      let minutes=0;
+      let hours=0;
+      let timer=null;
+      function display(){
+         seconds++;
+     if(seconds==60){
+        seconds=0;
+        minutes++;
+        if(minutes==60){
+            minutes=0;
+            hours++;
+        }
+     }
+     //ternary operator (condition? ture statement : false Statement)
+     let h= hours<10 ? "0"+ hours : hours;
+     let m= minutes<10 ? "0"+ minutes : minutes;
+     let s= seconds<10 ? "0"+ seconds : seconds;
+      displayTime.innerHTML=h +":"+ m +":"+ s;
+     }
+     function startWatch(){
+        if(timer!==null){
+            clearInterval(timer);
+        }
+        timer=setInterval(display, 1000);
+     }
+     function stopWatch(){
+        clearInterval(timer);
+     }
+     function resetWatch(){
+        clearInterval(timer);
+        hours=0;
+        seconds=0;
+        minutes=0;
+        displayTime.innerHTML= "0"+hours +":"+ "0"+minutes +":"+ "0"+seconds;
+     }
+    </script>
+</body>
+</html>
